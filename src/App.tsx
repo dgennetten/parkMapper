@@ -41,8 +41,8 @@ function App() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          <div className="lg:col-span-2 order-2 lg:order-1">
-            <div className="h-[calc(100vh-12rem)] rounded-lg overflow-hidden">
+          <div className="lg:col-span-2 order-1">
+            <div className="h-[50vh] lg:h-[calc(100vh-12rem)] rounded-lg overflow-hidden">
               <ParksList
                 parks={nationalParks}
                 onParkSelect={handleParkSelect}
@@ -50,9 +50,8 @@ function App() {
               />
             </div>
           </div>
-          
-          <div className="lg:col-span-3 order-1 lg:order-2">
-            <div className="h-[calc(100vh-12rem)] rounded-lg overflow-hidden shadow-lg">
+          <div className="lg:col-span-3 order-2">
+            <div className="h-[50vh] lg:h-[calc(100vh-12rem)] rounded-lg overflow-hidden shadow-lg">
               <InteractiveMap
                 parks={nationalParks}
                 selectedPark={selectedPark}

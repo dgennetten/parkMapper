@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import L from 'leaflet';
 import { Icon } from 'leaflet';
 import { NationalPark } from '../types/park';
 import { Layers } from 'lucide-react';
@@ -78,9 +79,16 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
   selectedPark, 
   onParkSelect 
 }) => {
-  const mapRef = useRef<any>(null);
+  const mapRef = useRef<L.Map | null>(null);
   const [currentLayer, setCurrentLayer] = useState<keyof typeof mapLayers>('street');
   const [showLayerPicker, setShowLayerPicker] = useState(false);
+
+  // Fix: Invalidate map size on selectedPark change or mount
+  useEffect(() => {
+    if (mapRef.current) {
+      setTimeout(() => mapRef.current?.invalidateSize(), 200);
+    }
+  }, [selectedPark]);
 
   const toggleLayerPicker = () => {
     setShowLayerPicker(!showLayerPicker);
